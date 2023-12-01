@@ -1,5 +1,8 @@
 FROM python:3.9-slim
 
+# Install the iputils package (providing ping)
+RUN apt-get update && apt-get install -y iputils-ping
+
 RUN pip install --upgrade pip
 
 ENV GOOGLE_APPLICATION_CREDENTIALS loggen_key/sa-datastream@ethereal-casing-404517.json
@@ -16,4 +19,4 @@ RUN pip install -r requirements.txt
 
 COPY . ./
 
-CMD python3 main.py
+CMD ["python3", "main.py"]

@@ -1,6 +1,5 @@
 import dataclasses
 import time
-
 import pandas as pd
 from entry_generator import generate_entry
 from publisher.pubsub_publisher import publish_message_to_pubsub
@@ -23,9 +22,11 @@ def update_active_clients_flags():
 
 
 if __name__ == '__main__':
+    print("Program started with success!", flush=True)
     while True:
         update_active_clients_flags()
         entry = generate_entry(all_clients)
+        print(f"New entry generated! {dataclasses.asdict(entry)}", flush=True)
         if entry is not None:
             publish_message_to_pubsub(dataclasses.asdict(entry))
             time.sleep(60)

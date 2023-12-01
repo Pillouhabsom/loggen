@@ -13,9 +13,8 @@ for i in range(len(project_ids)):
         topic=topic_ids[i],
     ))
 
-
 def publish_message_to_pubsub(entry):
     data = json.dumps(entry).encode("utf-8")
     for j in range(len(topic_names)):
         future = publisher.publish(topic_names[j], data)
-        print(f'published message {data} in topic: {topic_names[j]} - id {future.result()}')
+        print(f'entry published in topic: {topic_names[j]}', flush=True)
